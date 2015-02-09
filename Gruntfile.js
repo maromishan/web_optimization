@@ -17,7 +17,7 @@ module.exports = function(grunt) {
             combine: {
                 files: {
                 'css/style.min.css': ['css/style.css', 'css/print.css', 'css/smartphone.css'],
-                'views/css/bootstrap-grid.min.css': ['views/css/bootstrap-grid.css', 'views/css/style.css']
+                'views/css/style.min.css': ['views/css/bootstrap-grid.css', 'views/css/style.css']
                 }
             }
         },
