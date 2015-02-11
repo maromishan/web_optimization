@@ -5,7 +5,8 @@ module.exports = function(grunt) {
     grunt.registerTask('cssmin', ['cssmin']);
     grunt.registerTask('uncss', ['uncss']);
     grunt.registerTask('processhtml', ['processhtml']);
-
+    grunt.registerTask('imagemin', ['imagemin']);
+    //var jpegtran = require('imagemin-jpegtran');
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         copy: {
@@ -13,6 +14,17 @@ module.exports = function(grunt) {
                  cwd: 'src/', expand: true, src: '**', dest: 'dist/'
                 }
         },
+        imagemin: {                          // Task
+            static: {                          // Target
+              options: {                       // Target options
+                 optimizationLevel: 6/*,
+                 use: [jpegtran({progressive: false})]*/
+                },
+            files: {                         // Dictionary of files
+                'dist/img.png': 'views/images/pizzeria.jpg' // 'destination': 'source'
+      }
+       }
+       },
         cssmin: {
             combine: {
                 files: {
@@ -57,6 +69,10 @@ module.exports = function(grunt) {
                 files: ['css/*.css', 'views/css/*.css'],
                 tasks: ['cssmin', 'uncss', 'processhtml'],
             },
+            images: {
+                files:['img/*.jpg', 'views/images/*.jpg'],
+                tasks: ['imagemin'],
+            },
         },      
     });
     //Load plugins
@@ -66,4 +82,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-uncss');
     grunt.loadNpmTasks('grunt-processhtml');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
 };    
